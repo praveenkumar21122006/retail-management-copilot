@@ -37,6 +37,12 @@ npx vercel --prod
 3. Set the main file path to `streamlit_app.py`.
 4. Deploy. Streamlit installs `requirements.txt` automatically.
 
+To enable Gemini in Streamlit Cloud, open the app's **Settings → Secrets** and add:
+
+```toml
+GEMINI_API_KEY = "your-key"
+```
+
 Run it locally with:
 
 ```bash
