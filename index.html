@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ledger & Loom | Retail copilot</title>
+  <meta name="description" content="Evidence-backed retail operations copilot for small store teams." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-lockup">
+        <div class="brand-mark">L</div>
+        <div><strong>ledger & loom</strong><span>retail operations</span></div>
+      </div>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <button class="nav-item active"><span class="nav-icon">⌂</span>Today</button>
+        <button class="nav-item"><span class="nav-icon">▦</span>Sales</button>
+        <button class="nav-item"><span class="nav-icon">◫</span>Inventory</button>
+        <button class="nav-item"><span class="nav-icon">◌</span>Catalogue</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sync-card"><span class="status-dot"></span><div><strong>Data synced</strong><span>Today at 08:42</span></div><button aria-label="Refresh data" class="refresh-btn">↻</button></div>
+        <button class="nav-item muted"><span class="nav-icon">?</span>Help & feedback</button>
+        <div class="profile"><div class="avatar">JM</div><div><strong>Jo Morgan</strong><span>Store manager</span></div><span class="more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Workspace</span><b>/</b><strong>Today</strong></div>
+        <div class="topbar-actions"><span class="date-label">Saturday, 05 September 2026</span><button class="icon-button" aria-label="Notifications">♢<span class="notification-dot"></span></button><button class="help-button">?</button></div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="page-intro">
+          <div><p class="eyebrow">Saturday briefing <span class="live-pill"><i></i> Live data</span></p><h1>Good morning, Jo.</h1><p class="intro-copy">Here’s what deserves your attention across the shop floor today.</p></div>
+          <div class="store-filter"><label for="store-select">Viewing</label><select id="store-select"><option>All stores · 3</option><option>High Street</option><option>Riverside</option><option>Station kiosk</option></select></div>
+        </section>
+
+        <section class="metric-grid" aria-label="Key retail metrics">
+          <article class="metric-card sales-card"><div class="metric-top"><span>Sales this month</span><span class="metric-icon">↗</span></div><strong>$48,290</strong><div class="metric-foot"><span class="trend positive">↑ 8.4%</span><span>vs. Aug 2026</span><div class="sparkline sales-spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Units sold</span><span class="metric-icon">◉</span></div><strong>2,847</strong><div class="metric-foot"><span class="trend positive">↑ 4.1%</span><span>vs. Aug 2026</span><div class="sparkline units-spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></article>
+          <article class="metric-card"><div class="metric-top"><span>Stock value</span><span class="metric-icon">◇</span></div><strong>$31,640</strong><div class="metric-foot"><span class="trend neutral">→ 0.6%</span><span>vs. last week</span><div class="sparkline stock-spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></article>
+          <article class="metric-card attention-metric"><div class="metric-top"><span>Needs attention</span><span class="metric-icon">!</span></div><strong>8 <small>items</small></strong><div class="metric-foot"><span class="trend warning">3 urgent</span><span>across 3 stores</span><div class="attention-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></article>
+        </section>
+
+        <section class="workspace-grid">
+          <div class="main-column">
+            <div class="section-heading"><div><p class="eyebrow">Action queue</p><h2>Worth a look today <span class="count-badge">8</span></h2></div><button class="text-button">View all <span>→</span></button></div>
+            <div class="attention-list">
+              <article class="attention-row urgent"><div class="severity-mark">!</div><div class="attention-main"><div class="row-title"><h3>Matcha Starter Kit</h3><span class="tag urgent-tag">Likely stock-out</span></div><p>High Street <b>·</b> 4 units left <b>·</b> 9 sold in last 7 days</p><div class="evidence-line"><span>Runs out in <strong>2 days</strong></span><span>7-day velocity <strong>1.3/day</strong></span><span>Reorder point <strong>6 units</strong></span></div></div><button class="row-action" data-question="What should I reorder first?">Reorder <span>→</span></button></article>
+              <article class="attention-row warning-row"><div class="severity-mark">!</div><div class="attention-main"><div class="row-title"><h3>Linen Market Tote</h3><span class="tag warning-tag">Not moving</span></div><p>Riverside <b>·</b> 38 units on hand <b>·</b> 2 sold in last 30 days</p><div class="evidence-line"><span>Cover <strong>570 days</strong></span><span>Last sale <strong>14 days ago</strong></span><span>Stock value <strong>$1,140</strong></span></div></div><button class="row-action" data-question="What is overstocked?">Review stock <span>→</span></button></article>
+              <article class="attention-row trend-row"><div class="severity-mark trend-mark">↗</div><div class="attention-main"><div class="row-title"><h3>Cloudberry Candle · 220g</h3><span class="tag trend-tag">Sales spike</span></div><p>All stores <b>·</b> 31 sold this week <b>·</b> up from 18 last week</p><div class="evidence-line"><span>Week over week <strong>+72%</strong></span><span>Highest store <strong>Riverside</strong></span><span>Units left <strong>24</strong></span></div></div><button class="row-action" data-question="What changed in sales this week?">Investigate <span>→</span></button></article>
+              <article class="attention-row drop-row"><div class="severity-mark drop-mark">↓</div><div class="attention-main"><div class="row-title"><h3>Salted Caramel Biscuit</h3><span class="tag drop-tag">Sales drop</span></div><p>Station kiosk <b>·</b> 6 sold this week <b>·</b> down from 15 last week</p><div class="evidence-line"><span>Week over week <strong>−60%</strong></span><span>On hand <strong>42 units</strong></span><span>Price changed <strong>No</strong></span></div></div><button class="row-action" data-question="What sales dropped this week?">Investigate <span>→</span></button></article>
+            </div>
+          </div>
+
+          <aside class="copilot-panel">
+            <div class="copilot-header"><div class="copilot-orb">✦</div><div><p class="eyebrow">Ask your copilot</p><h2>What do you need to know?</h2></div><button class="panel-menu" aria-label="Copilot options">•••</button></div>
+            <div class="question-box"><textarea id="question-input" rows="2" placeholder="Ask about sales, stock, or a product..." aria-label="Ask a question"></textarea><button id="ask-button" class="ask-button" aria-label="Ask copilot">↗</button></div>
+            <div class="suggestions"><button data-question="What is likely to run out?">What might run out?</button><button data-question="How did the Matcha Starter Kit do this month?">Product performance</button><button data-question="What is overstocked?">Find overstock</button></div>
+            <div class="answer-area" id="answer-area"><div class="answer-placeholder"><div class="placeholder-icon">✦</div><p>Ask a question to see the numbers behind the answer.</p><span>Answers use sales and inventory data synced today.</span></div></div>
+            <div class="copilot-foot"><span class="source-dot"></span> Grounded in <strong>3 stores</strong> · 642 products</div>
+          </aside>
+        </section>
+
+        <section class="bottom-strip"><div class="strip-title"><span class="eyebrow">Quick view</span><h2>Store pulse</h2></div><div class="store-pulse"><div class="pulse-store"><div class="store-name"><span class="pulse-dot good"></span><strong>High Street</strong><span class="pulse-score">Healthy</span></div><div class="pulse-bar"><i style="width: 78%"></i></div><span>78% in-stock rate</span></div><div class="pulse-store"><div class="store-name"><span class="pulse-dot watch"></span><strong>Riverside</strong><span class="pulse-score watch-text">Watch</span></div><div class="pulse-bar"><i style="width: 61%"></i></div><span>61% in-stock rate</span></div><div class="pulse-store"><div class="store-name"><span class="pulse-dot good"></span><strong>Station kiosk</strong><span class="pulse-score">Healthy</span></div><div class="pulse-bar"><i style="width: 86%"></i></div><span>86% in-stock rate</span></div></div><button class="text-button">Open inventory <span>→</span></button></section>
+      </div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
