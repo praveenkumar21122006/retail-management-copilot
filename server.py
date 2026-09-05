@@ -2,6 +2,9 @@
 import json
 import mimetypes
 import os
+import html
+import urllib.error
+import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -35,6 +38,53 @@ ANSWERS = [
 def answer_for(question):
     text = str(question or "").lower()
     return next((answer for answer in ANSWERS if any(term in text for term in answer["matches"])), None)
+
+
+def gemini_answer(question):
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        return None
+
+    prompt = f"""You are a retail operations copilot. Answer the user's question using only the retail data below.
+Return only valid JSON with these keys: title, body, rows, recommendation, assumption.
+The rows value must be an array of four [label, value] pairs. Keep the answer concise and practical.
+If the data does not support an answer, say so clearly in the body and recommendation.
+
+Retail data:
+{json.dumps(DASHBOARD, ensure_ascii=False)}
+
+User question: {question}"""
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"responseMimeType": "application/json", "temperature": 0.2},
+    }
+    request = urllib.request.Request(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + api_key,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=15) as response:
+            result = json.loads(response.read())
+        text = result["candidates"][0]["content"]["parts"][0]["text"]
+        answer = json.loads(text)
+        rows = answer.get("rows", [])
+        if not isinstance(rows, list) or not all(isinstance(row, list) and len(row) == 2 for row in rows):
+            return None
+        return {
+            "title": html.escape(str(answer.get("title", "Gemini could not summarize this."))),
+            "body": html.escape(str(answer.get("body", "No supported answer was returned."))),
+            "rows": [[html.escape(str(row[0])), html.escape(str(row[1]))] for row in rows[:4]],
+            "recommendation": html.escape(str(answer.get("recommendation", "Review the available data before taking action."))),
+            "assumption": html.escape(str(answer.get("assumption", "Generated from the current retail dashboard data."))),
+        }
+    except (KeyError, TypeError, ValueError, urllib.error.URLError, TimeoutError):
+        return None
+
+
+def answer_question(question):
+    return answer_for(question) or gemini_answer(question)
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -71,7 +121,7 @@ class Handler(BaseHTTPRequestHandler):
         try:
             length = int(self.headers.get("Content-Length", 0))
             payload = json.loads(self.rfile.read(length))
-            answer = answer_for(payload.get("question"))
+            answer = answer_question(payload.get("question"))
             self.send_json(200, {"answer": answer} if answer else {"answer": None, "message": "I do not have enough data to answer that yet."})
         except (ValueError, json.JSONDecodeError, AttributeError):
             self.send_json(400, {"error": "Request body must be valid JSON."})

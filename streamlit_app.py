@@ -2,7 +2,7 @@ import html
 
 import streamlit as st
 
-from server import ANSWERS, DASHBOARD, answer_for
+from server import ANSWERS, DASHBOARD, answer_question
 
 
 st.set_page_config(
@@ -110,7 +110,7 @@ with right_column:
     suggestions = ["What might run out?", "What is overstocked?", "How did the Matcha Starter Kit do this month?"]
     selected = st.selectbox("Quick questions", ["Choose a question..."] + suggestions, label_visibility="collapsed")
     if st.button("Ask copilot", type="primary", use_container_width=True):
-        st.session_state["answer"] = answer_for(question.strip() or ("" if selected.startswith("Choose") else selected))
+        st.session_state["answer"] = answer_question(question.strip() or ("" if selected.startswith("Choose") else selected))
     if "answer" in st.session_state:
         render_answer(st.session_state["answer"])
     else:

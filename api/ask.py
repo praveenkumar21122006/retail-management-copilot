@@ -1,7 +1,7 @@
 import json
 from http.server import BaseHTTPRequestHandler
 
-from server import answer_for
+from server import answer_question
 
 
 class handler(BaseHTTPRequestHandler):
@@ -9,7 +9,7 @@ class handler(BaseHTTPRequestHandler):
         try:
             length = int(self.headers.get("Content-Length", 0))
             payload = json.loads(self.rfile.read(length))
-            answer = answer_for(payload.get("question"))
+            answer = answer_question(payload.get("question"))
         except (AttributeError, TypeError, ValueError, json.JSONDecodeError):
             self._send_json({"error": "Request body must be valid JSON."}, 400)
             return
