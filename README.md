@@ -20,3 +20,17 @@ For a CLI deployment:
 npx vercel
 npx vercel --prod
 ```
+
+## Deploy to Streamlit Community Cloud
+
+1. Push this repository to GitHub.
+2. Open [share.streamlit.io](https://share.streamlit.io/) and choose this repository.
+3. Set the main file path to `streamlit_app.py`.
+4. Deploy. Streamlit installs `requirements.txt` automatically.
+
+Run it locally with:
+
+```bash
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
