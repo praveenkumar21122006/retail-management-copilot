@@ -1,4 +1,4 @@
-# Ledger & Loom
+# retail-management-copilot
 
 A self-contained retail operations copilot prototype for small store teams.
 
